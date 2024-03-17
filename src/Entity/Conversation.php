@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ConversationRepository::class)]
 class Conversation
@@ -16,11 +17,13 @@ class Conversation
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: "La date de début est obligatoire.")]
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $star_at = null;
+    private ?\DateTime $starDate = null;
 
+    #[Assert\NotBlank(message: "La date de fin est obligatoire.")]
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $endAt = null;
+    private ?\DateTime $endDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'conversations')]
     private ?User $user = null;
@@ -38,26 +41,26 @@ class Conversation
         return $this->id;
     }
 
-    public function getStarAt(): ?\DateTimeInterface
+    public function getStarDate(): ?\DateTime
     {
-        return $this->star_at;
+        return $this->starDate;
     }
 
-    public function setStarAt(?\DateTimeInterface $star_at): static
+    public function setStarDate(?\DateTime $starDate): static
     {
-        $this->star_at = $star_at;
+        $this->starDate = $starDate;
 
         return $this;
     }
 
-    public function getEndAt(): ?\DateTimeInterface
+    public function getEndDate(): ?\DateTime
     {
-        return $this->endAt;
+        return $this->endDate;
     }
 
-    public function setEndAt(?\DateTimeInterface $endAt): static
+    public function setEndDate(?\DateTime $endDate): static
     {
-        $this->endAt = $endAt;
+        $this->endDate = $endDate;
 
         return $this;
     }

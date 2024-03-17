@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'], message: 'Un compte existe déja avec cet email')]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[UniqueEntity(fields: ['pseudo'], message: 'Un compte existe déja avec ce Pseudo')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {

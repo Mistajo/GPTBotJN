@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\MessageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 class Message
@@ -14,6 +15,10 @@ class Message
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Length(
+        max: 1000,
+        maxMessage: 'Le commentaire ne doit pas dépasser {{ limit }} caractères.',
+    )]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
